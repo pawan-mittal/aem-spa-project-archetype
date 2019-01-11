@@ -16,7 +16,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { getVerifyObserver } from './Utils';
 import { RouteListener, withRoute } from '../RouteHelper';
 import { ModelManager } from '@adobe/cq-spa-page-model-manager';
 import sinon from 'sinon';
@@ -31,11 +30,7 @@ describe('RouterHelper ->', () => {
     const CUSTOM_ROUTE_PATH_2 = '/content/custom/2';
     const CUSTOM_ROUTE_PATH_ALIAS_2 = '/custom2';
 
-    let observer;
-
-    let observerConfig = { attributes: true, subtree: true, childList: true };
-
-    let rootNode;
+   let rootNode;
 
     class RouteContent extends Component {
         render() {
@@ -59,10 +54,6 @@ describe('RouterHelper ->', () => {
     afterEach(() => {
         window.location.hash = '';
 
-        if (observer) {
-            observer.disconnect();
-        }
-
         if (rootNode) {
             document.body.removeChild(rootNode);
         }
@@ -72,13 +63,6 @@ describe('RouterHelper ->', () => {
 
     describe('withRoute ->', () => {
         it('should pass the properties to the wrapped component', () => {
-            // Expect the page title to be passed to the wrapped component
-            observer = getVerifyObserver(function (mutation) {
-                return mutation.type === 'childList' && mutation.addedNodes && mutation.addedNodes.length > 0 && mutation.addedNodes[0].dataset.title === PAGE_TITLE;
-            });
-
-            observer.observe(rootNode, observerConfig);
-
             const cqModel = {
                 path: '/content/page/path',
                 title: PAGE_TITLE
