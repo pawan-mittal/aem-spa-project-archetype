@@ -1,5 +1,5 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ~ Copyright 2018 Adobe Systems Incorporated
+ ~ Copyright 2018 Adobe Incorporated
  ~
  ~ Licensed under the Apache License, Version 2.0 (the "License");
  ~ you may not use this file except in compliance with the License.
@@ -17,8 +17,9 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { getVerifyObserver } from './Utils';
-import { RouteListener, withRoute } from '../src/RouteHelper';
+import { RouteListener, withRoute } from '../RouteHelper';
 import { ModelManager } from '@adobe/cq-spa-page-model-manager';
+import sinon from 'sinon';
 
 
 describe('RouterHelper ->', () => {
@@ -70,11 +71,11 @@ describe('RouterHelper ->', () => {
     });
 
     describe('withRoute ->', () => {
-        it('should pass the properties to the wrapped component', (done) => {
+        it('should pass the properties to the wrapped component', () => {
             // Expect the page title to be passed to the wrapped component
             observer = getVerifyObserver(function (mutation) {
                 return mutation.type === 'childList' && mutation.addedNodes && mutation.addedNodes.length > 0 && mutation.addedNodes[0].dataset.title === PAGE_TITLE;
-            }, done);
+            });
 
             observer.observe(rootNode, observerConfig);
 
