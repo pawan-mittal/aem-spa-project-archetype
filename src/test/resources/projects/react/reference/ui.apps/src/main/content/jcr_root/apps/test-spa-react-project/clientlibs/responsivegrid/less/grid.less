@@ -13,9 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
- @import (reference) "/apps/weretail/clientlibs/common/variables.less";
+
  @import "/libs/wcm/foundation/clientlibs/grid/grid_base.less";
- 
+
  /* maximum amount of grid cells to be provided */
  @max_col: 12;
  
@@ -24,7 +24,7 @@
      .generate-grid(default, @max_col);
      width: auto;
  }
-  
+ 
  /* phone breakpoint */
  @media (max-width: 650px) {
      .aem-Grid {
@@ -40,7 +40,7 @@
  }
  
  .aem-GridColumn {
-     padding: 0 @grid-gutter-width/2;
+     padding: 0 15px;
  }
  
  /* TODO: find a better place for this */
